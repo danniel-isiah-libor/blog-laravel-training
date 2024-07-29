@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Post\StoreRequest;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -23,5 +24,10 @@ class PostController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        $formData = $request->validated();
+
+        Post::create($formData);
+
+        return redirect()->route('dashboard');
     }
 }
