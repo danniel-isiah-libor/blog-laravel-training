@@ -7,8 +7,10 @@
 
     <div class="py-12">
         <x-forms.posts>
-            <form class="space-y-6" action="{{ route('posts.store') }}" method="POST">
+            <form class="space-y-6" action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+
+                <input type="file" name="avatar">
 
                 <div>
                     <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Title</label>

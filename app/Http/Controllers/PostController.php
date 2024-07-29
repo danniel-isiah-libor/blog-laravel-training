@@ -35,7 +35,9 @@ class PostController extends Controller
     {
         $formData = $request->validated();
 
-        Post::create($formData);
+        // Post::create($formData);
+
+        $formData['avatar']->store('avatars', 'public');
 
         return redirect()->route('dashboard');
     }
