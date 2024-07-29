@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Post\StoreRequest;
 use App\Http\Requests\Post\UpdateRequest;
+use App\Http\Requests\Post\DestroyRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -65,5 +66,12 @@ class PostController extends Controller
         $post->update($formData);
 
         return redirect()->route('posts.show', ['post' => $post->id]);
+    }
+
+    public function destroy(DestroyRequest $request, Post $post)
+    {
+        $post->delete();
+
+        return redirect()->route('dashboard');
     }
 }

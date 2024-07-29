@@ -32,6 +32,9 @@ Route::prefix('/posts')->name('posts.')->group(function () {
 
     Route::put('/{post}/update', [PostController::class, 'update'])
         ->name('update');
+
+    Route::delete('/{post}/delete', [PostController::class, 'destroy'])
+        ->name('delete');
 });
 
 require __DIR__ . '/auth.php';

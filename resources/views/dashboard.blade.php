@@ -13,6 +13,10 @@
                 </div>
             </div>
 
+            <a href="{{ route('posts.create') }}">
+                Create New Post
+            </a>
+
             <ul role="list" class="divide-y divide-gray-100">
                 @foreach ($posts as $post)
                     <li class="flex justify-between gap-x-6 py-5">
@@ -27,7 +31,9 @@
                             </div>
                         </div>
                         <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                            <p class="text-sm leading-6 text-gray-900">{{ $post->title }}</p>
+                            <a href="{{ route('posts.show', ['post' => $post->id]) }}">
+                                <p class="text-sm leading-6 text-gray-900">{{ $post->title }}</p>
+                            </a>
                             <p class="mt-1 text-xs leading-5 text-gray-500">{{ $post->updated_at->diffForHumans() }}</p>
                         </div>
                     </li>

@@ -7,6 +7,16 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <a href="{{ route('posts.edit', ['post' => $post->id]) }}">
+                Update
+            </a>
+
+            <br>
+
+            <a href="{{ route('posts.delete', ['post' => $post->id]) }}">
+                Delete
+            </a>
+
             <h1>Title: {{ $post->title }}</h1>
 
             <br>
