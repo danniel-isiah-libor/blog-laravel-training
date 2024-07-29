@@ -43,11 +43,11 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        $isUserDeactivated = User::withTrashed()
+        $user = User::withTrashed()
             ->whereEmail($this->string('email'))
-            ->exists();
+            ->first();
 
-        if ($isUserDeactivated) {
+        if (optional($user)->deleted_at) {
             Session::flash('is_deactivated', true);
 
             throw ValidationException::withMessages([
