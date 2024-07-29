@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix('/posts')->name('posts.')->group(function () {
+Route::prefix('/posts')->name('posts.')->middleware(['custom'])->group(function () {
     Route::get('/create', [PostController::class, 'create'])
         ->name('create');
 
@@ -36,5 +37,7 @@ Route::prefix('/posts')->name('posts.')->group(function () {
     Route::delete('/{post}/delete', [PostController::class, 'destroy'])
         ->name('delete');
 });
+
+Route::resource('/comments', CommentController::class);
 
 require __DIR__ . '/auth.php';

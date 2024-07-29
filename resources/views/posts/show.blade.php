@@ -7,9 +7,11 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <a href="{{ route('posts.edit', ['post' => $post->id]) }}">
-                Update
-            </a>
+            @if (auth()->user()->id === $post->user_id)
+                <a href="{{ route('posts.edit', ['post' => $post->id]) }}">
+                    Update
+                </a>
+            @endif
 
             <br>
 
@@ -37,6 +39,17 @@
             <p>
                 {{ $post->user->email }}
             </p>
+
+            <form action="{{ route('comments.store') }}" method="post">
+                @csrf
+
+                <input type="hidden" value="{{ $post->id }}" name="post_id">
+
+                <input type="text" name="comment">
+
+                <button type="submit">Submit</button>
+
+            </form>
         </div>
     </div>
 </x-app-layout>
