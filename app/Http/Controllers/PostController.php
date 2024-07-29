@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function index()
+    {
+        $posts = Post::orderBy('updated_at', 'desc')->paginate(2);
+
+        return view('dashboard', ['posts' => $posts]);
+    }
+
     /**
      * Display post create page
      *
