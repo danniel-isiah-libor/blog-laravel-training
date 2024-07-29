@@ -3,6 +3,8 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -39,5 +41,14 @@ Route::prefix('/posts')->name('posts.')->middleware(['custom'])->group(function 
 });
 
 Route::resource('/comments', CommentController::class);
+
+Route::get('/download', function () {
+    $users = User::all();
+
+    $pdf = Pdf::loadView('posts.create', $users->toArray())
+        ->setPaper('a4', 'portrait');
+
+    return $pdf->download('filename.pdf');
+});
 
 require __DIR__ . '/auth.php';
